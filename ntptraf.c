@@ -152,6 +152,10 @@ void process_packet(u_char *user, const struct pcap_pkthdr *hdr, const u_char *p
 		return;
 
 	switch (pkt[0] & 0x7) {
+		case 0:
+			if ((pkt[0] & 0x3f) != 0x8)
+				return;
+			/* Fall through */
 		case 3:
 			traf->bins[idx].client++;
 			break;
